@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	pokedex := getCmds()
 
@@ -26,7 +26,7 @@ func startRepl() {
 			fmt.Println()
 			continue
 		}
-		cmd.callback()
+		cmd.callback(cfg)
 	}
 }
 

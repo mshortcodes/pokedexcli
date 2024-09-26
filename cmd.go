@@ -3,7 +3,7 @@ package main
 type cmd struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 func getCmds() map[string]cmd {
@@ -17,6 +17,11 @@ func getCmds() map[string]cmd {
 			name:        "exit",
 			description: "Exits the pokedex",
 			callback:    cmdExit,
+		},
+		"map": {
+			name:        "map",
+			description: "lists location areas",
+			callback:    cmdMap,
 		},
 	}
 }

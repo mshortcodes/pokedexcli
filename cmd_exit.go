@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func cmdExit() error {
+func cmdExit(cfg *config) error {
 	fmt.Println("Goodbye!")
 	os.Exit(0)
 	return nil
