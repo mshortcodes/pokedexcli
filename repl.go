@@ -4,10 +4,12 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
+	pokedex := getCmds()
 
 	for {
 		fmt.Print("pokedex > ")
@@ -17,14 +19,22 @@ func startRepl() {
 		if len(cleaned) == 0 {
 			continue
 		}
-		cmd := cleaned[0]
-		switch cmd {
-		case "help":
-			fmt.Println(pokedex[cmd].description)
-		case "exit":
-			os.Exit(0)
-		default:
+		command := cleaned[0]
+		cmd, ok := pokedex[command]
+		if !ok {
 			fmt.Println("Not a valid command.")
+			fmt.Println()
+			continue
 		}
+		cmd.callback()
 	}
+}
+
+func cleanInput(input string) []string {
+	lowered := strings.ToLower(input)
+	args := strings.Fields(lowered)
+	if len(args) < 1 {
+		return nil
+	}
+	return args
 }
