@@ -1,14 +1,30 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"log"
 )
 
 func cmdMap(cfg *config) error {
-	areas, err := cfg.pokeapiClient.ListAreas()
+	areas, err := cfg.pokeapiClient.ListAreas(cfg.nextURL)
 	if err != nil {
-		log.Fatal(err)
+		return err
+	}
+	for _, area := range areas.Results {
+		fmt.Printf(" - %s\n", area.Name)
+	}
+	cfg.nextURL = areas.Next
+	cfg.prevURL = areas.Previous
+	return nil
+}
+
+func cmdMapb(cfg *config) error {
+	if cfg.prevURL == nil {
+		return errors.New("you are on the first page")
+	}
+	areas, err := cfg.pokeapiClient.ListAreas(cfg.prevURL)
+	if err != nil {
+		return err
 	}
 	for _, area := range areas.Results {
 		fmt.Printf(" - %s\n", area.Name)

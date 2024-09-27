@@ -26,7 +26,10 @@ func startRepl(cfg *config) {
 			fmt.Println()
 			continue
 		}
-		cmd.callback(cfg)
+		err := cmd.callback(cfg)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 }
 

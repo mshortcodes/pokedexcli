@@ -23,5 +23,10 @@ func getCmds() map[string]cmd {
 			description: "lists location areas",
 			callback:    cmdMap,
 		},
+		"mapb": {
+			name:        "mapb",
+			description: "lists previous location areas",
+			callback:    cmdMapb,
+		},
 	}
 }
