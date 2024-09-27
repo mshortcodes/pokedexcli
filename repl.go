@@ -20,13 +20,17 @@ func startRepl(cfg *config) {
 			continue
 		}
 		command := cleaned[0]
+		args := []string{}
+		if len(cleaned) > 1 {
+			args = cleaned[1:]
+		}
 		cmd, ok := pokedex[command]
 		if !ok {
 			fmt.Println("Not a valid command.")
 			fmt.Println()
 			continue
 		}
-		err := cmd.callback(cfg)
+		err := cmd.callback(cfg, args...)
 		if err != nil {
 			fmt.Println(err)
 		}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func cmdMap(cfg *config) error {
+func cmdMap(cfg *config, args ...string) error {
 	areas, err := cfg.pokeapiClient.ListAreas(cfg.nextURL)
 	if err != nil {
 		return err
@@ -18,7 +18,7 @@ func cmdMap(cfg *config) error {
 	return nil
 }
 
-func cmdMapb(cfg *config) error {
+func cmdMapb(cfg *config, args ...string) error {
 	if cfg.prevURL == nil {
 		return errors.New("you are on the first page")
 	}
