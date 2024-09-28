@@ -38,5 +38,15 @@ func getCmds() map[string]cmd {
 			description: "attempt to catch a pokemon and add it to your pokedex",
 			callback:    cmdCatch,
 		},
+		"inspect": {
+			name:        "inspect {pokemon_name}",
+			description: "view information about a caught pokemon",
+			callback:    cmdInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "list all the pokemon in your pokedex",
+			callback:    cmdPokedex,
+		},
 	}
 }
